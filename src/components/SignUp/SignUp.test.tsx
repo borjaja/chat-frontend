@@ -1,7 +1,7 @@
 import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import SignUp from "./SignUp";
-import * as fn from "../../services/auth/auth";
+import auth from "../../services/auth/auth";
 
 // Mock signUp
 // jest.mock("../../services/auth/auth", () => ({
@@ -30,7 +30,9 @@ describe("SignUp Component", () => {
   });
 
   it("Submitting the form with the data of an already registered user shows an error on the screen", async () => {
-    const spy = jest.spyOn(fn, "signUp").mockImplementation(() => Promise.resolve({ response: "Error" }));
+    const spy = jest
+      .spyOn(auth, "signUp")
+      .mockImplementation(() => Promise.resolve({ response: "Error" }));
     render(<SignUp />);
 
     userEvent.click(screen.getByAltText("Write username"));
